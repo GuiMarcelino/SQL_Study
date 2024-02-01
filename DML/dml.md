@@ -45,7 +45,6 @@ CREATE TABLE Alunos_Cursos (
 );
 ```
 
-
 # Explicação de cada tabela e relacionamento:
 
 * ### Tabela de Alunos
@@ -75,6 +74,84 @@ CREATE TABLE Alunos_Cursos (
         
         Devido à natureza complexa desse relacionamento, ele não pode ser representado diretamente no modelo relacional e requer uma tabela de junção ou uma tabela associativa, que no nosso caso é a tabela Alunos_Cursos.
 
+___
+
+### Comando INSERT:
+#### O que é INSERT?
+* O comando INSERT é usado para adicionar novos registros (linhas) a uma tabela em um banco de dados. Ele permite inserir valores em uma ou mais colunas da tabela. Este comando é fundamental para adicionar dados ao banco de dados.
+
+* A estrutura básica de um comando INSERT é a seguinte:
+
+      nome_tabela: O nome da tabela onde os dados serão inseridos.
+
+      (coluna1, coluna2, ...): As colunas nas quais os dados serão inseridos. Você pode omitir este especificador de coluna se estiver fornecendo valores para todas as colunas da tabela na ordem em que são definidas.
+
+      VALUES (valor1, valor2, ...): Os valores correspondentes às colunas especificadas. Os tipos de dados dos valores devem corresponder aos tipos de dados das colunas.
+
+    ```sql
+    INSERT INTO nome_tabela (coluna1, coluna2, ...)
+    VALUES (valor1, valor2, ...);
+    ```
+
+```sql
+-- Adicionando Alunos
+ INSERT INTO Alunos (Nome, Idade) VALUES 
+('João', 20),
+('Maria', 22),
+('Carlos', 19);
+
+-- Adicionando Cursos
+INSERT INTO Cursos (Nome, Periodo, Sala) VALUES 
+('Matemática', 'Manhã', '101'),
+('Literatura', 'Tarde', '102'),
+('Ciência', 'Manhã', '103'),
+('História', 'Tarde', '104'),
+('Geografia', 'Noite', '105');
+
+-- Vinculando Alunos a Cursos
+INSERT INTO Alunos_Cursos (AlunoID, CursoID) VALUES 
+(1, 1),
+(1, 2),
+(2, 3),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(3, 5);
+```
+
+### Comando UPDATE:
+#### O que é UPDATE?
+* O comando UPDATE é utilizado para modificar os dados existentes em uma ou mais linhas de uma tabela no banco de dados. Ele permite alterar valores de uma ou mais colunas, baseando-se em uma condição especificada.
+
+* A estrutura básica de um comando UPDATE é a seguinte:
+
+      nome_tabela: Nome da tabela onde os dados serão atualizados.
+
+      SET: Especifica as colunas que serão    atualizadas e seus novos valores.
+
+      WHERE: Define a condição para selecionar quais linhas devem ser atualizadas. Se omitido, todas as linhas da tabela serão atualizadas, o que deve ser feito com cautela.
 
 
+    ```sql
+    UPDATE nome_tabela
+    SET coluna1 = novo_valor1, coluna2 = novo_valor2, ...
+    WHERE condição;
+    ```
 
+```sql
+-- Alterando dado da tabela de Alunos
+UPDATE Alunos
+SET Idade = 21
+WHERE Nome = 'João';
+
+-- Alterando dado da tabela de Cursos
+UPDATE Cursos
+SET Periodo = 'Tarde'
+WHERE Periodo = 'Manhã';
+
+-- Atualizar Múltiplas Colunas da tabela de Cursos
+UPDATE Cursos
+SET Nome = 'Matemática Avançada', Sala = '202'
+WHERE ID = 1;
+```
