@@ -76,7 +76,7 @@ CREATE TABLE Alunos_Cursos (
 
 ___
 
-### Comando INSERT:
+## Comando INSERT:
 #### O que é INSERT?
 * O comando INSERT é usado para adicionar novos registros (linhas) a uma tabela em um banco de dados. Ele permite inserir valores em uma ou mais colunas da tabela. Este comando é fundamental para adicionar dados ao banco de dados.
 
@@ -119,8 +119,8 @@ INSERT INTO Alunos_Cursos (AlunoID, CursoID) VALUES
 (3, 4),
 (3, 5);
 ```
-
-### Comando UPDATE:
+___
+## Comando UPDATE:
 #### O que é UPDATE?
 * O comando UPDATE é utilizado para modificar os dados existentes em uma ou mais linhas de uma tabela no banco de dados. Ele permite alterar valores de uma ou mais colunas, baseando-se em uma condição especificada.
 
@@ -147,11 +147,207 @@ WHERE Nome = 'João';
 
 -- Alterando dado da tabela de Cursos
 UPDATE Cursos
-SET Periodo = 'Tarde'
-WHERE Periodo = 'Manhã';
+SET Periodo = 'Manhã'
+WHERE Nome = 'Geografia';
 
 -- Atualizar Múltiplas Colunas da tabela de Cursos
 UPDATE Cursos
 SET Nome = 'Matemática Avançada', Sala = '202'
 WHERE ID = 1;
 ```
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alerta Listrado</title>
+<style>
+  .alert-stripes {
+    background-image: linear-gradient(
+      45deg,
+      #ffcccb 25%,
+      #f8d7da 25%,
+      #f8d7da 50%,
+      #ffcccb 50%,
+      #ffcccb 75%,
+      #f8d7da 75%,
+      #f8d7da 100%
+    );
+    background-size: 56.57px 56.57px;
+    padding: 20px;
+    color: #842029; /* Cor do texto */
+    border: 1px solid #f5c2c7;
+    font-size: 18px; /* Tamanho da fonte aumentado */
+    font-family: Arial, sans-serif; /* Fonte mais legível */
+  }
+  .alert-stripes strong {
+    color: #d9534f; /* Cor mais escura para destaque */
+    font-size: 20px; /* Tamanho da fonte do título aumentado */
+  }
+  .alert-stripes ul {
+    margin-top: 10px;
+  }
+  .alert-stripes li {
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="alert-stripes">
+  <strong>🚨 Dicas Importantes com UPDATE:</strong>
+  <ul>
+    <li><strong>Sempre use a cláusula WHERE com cautela:</strong> Se você omitir a cláusula WHERE, todas as linhas da tabela serão atualizadas, o que pode levar a alterações indesejadas e de grande escala.</li>
+    <li><strong>Teste com SELECT antes:</strong> Antes de executar um UPDATE, especialmente em tabelas grandes ou críticas, você pode usar um comando SELECT com a mesma cláusula WHERE para garantir que está selecionando as linhas corretas.</li>
+  </ul>
+</div>
+</body>
+</html>
+
+___
+### Comando DELETE:
+____
+#### O que é DELETE?
+
+* O comando DELETE é usado para remover um ou mais registros de uma tabela em um banco de dados. É uma ferramenta poderosa que deve ser usada com cautela, pois a exclusão de registros é uma operação permanente (a menos que o banco de dados esteja configurado para suportar operações de undo ou haja backups recentes).
+
+* A estrutura básica de um comando DELETE é a seguinte:
+
+      nome_tabela: O nome da tabela de onde os registros serão excluídos.
+
+      WHERE condição: Uma condição que especifica quais registros devem ser excluídos. Se a cláusula WHERE for omitida, todos os registros da tabela serão excluídos, o que deve ser feito com extrema cautela.
+
+
+    ```sql
+    DELETE FROM nome_tabela
+    WHERE condição;
+    ```
+
+```sql
+-- Deletar um Registro Específico
+DELETE FROM Alunos
+WHERE Nome = 'Rafael';
+
+-- Deletar Registros com Condições Específicas
+DELETE FROM Alunos
+WHERE Idade < 20;
+
+-- Deletar Todos os Registros de uma Tabela
+DELETE FROM Alunos;
+```
+
+### Registros na tabela de Alunos:
+<table>
+  <tr>
+    <th style="background-color: #989595;"><strong>Id</strong></th>
+    <th style="background-color: #989595;"><strong>Nome</strong></th>
+    <th style="background-color: #989595;"><strong>Idade</strong></th>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Maria</td>
+    <td>22</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Carlos</td>
+    <td>19</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>João</td>
+    <td>21</td>
+  </tr>
+</table>
+
+
+### Registros na tabela de Cursos:
+<table>
+  <tr>
+    <th style="background-color: #989595;"><strong>Id</strong></th>
+    <th style="background-color: #989595;"><strong>Nome</strong></th>
+    <th style="background-color: #989595;"><strong>Periodo</strong></th>
+    <th style="background-color: #989595;"><strong>Sala</strong></th>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Literatura</td>
+    <td>Tarde</td>
+    <td>102</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>Ciência</td>
+    <td>Manhã</td>
+    <td>103</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>História</td>
+    <td>Tarde</td>
+    <td>104</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>Geografia</td>
+    <td>Manhã</td>
+    <td>105</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>Matemática Avançada</td>
+    <td>Manhã</td>
+    <td>202</td>
+  </tr>
+</table>
+
+
+### Registros na tabela de Alunos_Cursos:
+<table>
+  <tr>
+    <th style="background-color: #989595;"><strong>Id</strong></th>
+    <th style="background-color: #989595;"><strong>AlunoId</strong></th>
+    <th style="background-color: #989595;"><strong>CursoId</strong></th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>1</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>1</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>2</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>3</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>3</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>3</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>3</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>3</td>
+    <td>5</td>
+  </tr>
+</table>
