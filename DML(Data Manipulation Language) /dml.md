@@ -161,39 +161,6 @@ WHERE ID = 1;
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Alerta Listrado</title>
-<style>
-  .alert-stripes {
-    background-image: linear-gradient(
-      45deg,
-      #ffcccb 25%,
-      #f8d7da 25%,
-      #f8d7da 50%,
-      #ffcccb 50%,
-      #ffcccb 75%,
-      #f8d7da 75%,
-      #f8d7da 100%
-    );
-    background-size: 56.57px 56.57px;
-    padding: 20px;
-    color: #842029; /* Cor do texto */
-    border: 1px solid #f5c2c7;
-    font-size: 18px; /* Tamanho da fonte aumentado */
-    font-family: Arial, sans-serif; /* Fonte mais legível */
-  }
-  .alert-stripes strong {
-    color: #d9534f; /* Cor mais escura para destaque */
-    font-size: 20px; /* Tamanho da fonte do título aumentado */
-  }
-  .alert-stripes ul {
-    margin-top: 10px;
-  }
-  .alert-stripes li {
-    margin-bottom: 5px;
-  }
-</style>
-</head>
-<body>
 
 <div class="alert-stripes">
   <strong>🚨 Dicas Importantes com UPDATE:</strong>
