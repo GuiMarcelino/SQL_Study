@@ -11,19 +11,19 @@ ___
 ## 1)```Create``` Usado para criar uma nova tabela.
 
 ```sql
-CREATE TABLE Alunos (
+CREATE TABLE Students (
   ID int,
   Nome varchar(255),
   Idade int
 );
 
 ```
-### Tabela de Alunos sem registros
+### Tabela de Students sem registros
 <table>
    <tr>
     <th style="background-color: #989595;"><strong>Id</strong></th>
-    <th style="background-color: #989595;"><strong>Nome</strong></th>
-    <th style="background-color: #989595;"><strong>Idade</strong></th>
+    <th style="background-color: #989595;"><strong>Name</strong></th>
+    <th style="background-color: #989595;"><strong>Age</strong></th>
   </tr>
   <tr>
     <td>1</td>
@@ -41,39 +41,39 @@ ___
 ## 2)```Alter``` Usado para fazer mudanças em uma tabela existente.
 ```sql
 -- Adicionando uma nova coluna:
-ALTER TABLE Alunos
+ALTER TABLE Students
     ADD COLUMN Email varchar(255);
 
 -- Renomeando uma coluna:
-ALTER TABLE Alunos
-    RENAME COLUMN Nome TO NomeCompleto;
+ALTER TABLE Students
+    RENAME COLUMN Name TO FullName;
 
 -- Mudando o tipo de dado de uma coluna:
-ALTER TABLE Alunos
+ALTER TABLE Students
 ALTER COLUMN ID TYPE bigint;
 
 -- Mudando um índice:
-ALTER INDEX idx_nome_completo
-RENAME TO idx_nome_completo_aluno;
+ALTER INDEX idx_full_name
+RENAME TO idx_full_name_student;
 
 -- Mudando "Schema" pode renomear um esquema existente:
-ALTER SCHEMA nome_atual
-RENAME TO novo_nome;
+ALTER SCHEMA current_name
+RENAME TO new_name;
 
 -- Mudando  uma role (usuário ou grupo), como alterar a senha:
-ALTER ROLE nome_usuario
-WITH PASSWORD 'nova_senha';
+ALTER ROLE new_user
+WITH PASSWORD 'new_password';
 ```
 ___
 ## 3)```DROP (IF EXISTS)``` 
 ```sql
 -- Excluir uma Tabela:
-DROP TABLE IF EXISTS Alunos;
+DROP TABLE IF EXISTS Students;
 
 -- Excluir um Índice:
-DROP INDEX IF EXISTS idx_nome_completo_aluno;
+DROP INDEX IF EXISTS idx_full_name_student;
 
 -- Excluir uma View:
-DROP VIEW IF EXISTS view_alunos_ativos;
+DROP VIEW IF EXISTS view_active_students;
 ```
 

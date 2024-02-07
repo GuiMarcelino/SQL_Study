@@ -20,59 +20,58 @@ ___
 # Criando Tabelas de exemplo
 
 ```sql
--- Tabela de Alunos
-CREATE TABLE Alunos (
+-- Tabela de Students
+CREATE TABLE Students (
   ID int PRIMARY KEY,
-  Nome varchar(255),
-  Idade int
+  Name varchar(255),
+  Age int
 );
 
--- Tabela de Cursos
-CREATE TABLE Cursos (
+-- Tabela de Courses
+CREATE TABLE Courses (
     ID serial PRIMARY KEY,
-    Nome varchar(255),
-    Periodo varchar(50),
-    Sala varchar(50)
+    Name varchar(255),
+    Period varchar(50),
+    Classroom varchar(50)
 );
 
 -- Tabela Intermediária ou de junção
-CREATE TABLE Alunos_Cursos (
+CREATE TABLE Students_Courses (
     ID serial PRIMARY KEY,
-    AlunoID int NOT NULL,
-    CursoID int NOT NULL,
-    FOREIGN KEY (AlunoID) REFERENCES Alunos (ID),
-    FOREIGN KEY (CursoID) REFERENCES Cursos (ID)
+    StudentID int NOT NULL,
+    CourseID int NOT NULL,
+    FOREIGN KEY (StudentID) REFERENCES Students (ID),
+    FOREIGN KEY (CourseID) REFERENCES Courses (ID)
 );
 ```
 
 # Explicação de cada tabela e relacionamento:
 
-* ### Tabela de Alunos
+* ### Tabela de Students
   * ID serial PRIMARY KEY: Chave  primária e identificador do aluno.
-  * Nome varchar(255): Nome do aluno.
-  * Idade int: Idade do aluno.
+  * Name varchar(255): Nome do aluno.
+  * Age int: Idade do aluno.
 
-* ### Tabela de Cursos:
+* ### Tabela de Courses:
   * ID serial int PRIMARY KEY: Chave  primária e identificador do curso.
-  * Nome varchar(255): Nome do curso.
-  * Periodo varchar(50): Período que o curso é realizado(matutino/vespertino/noturno).
-  * Sala varchar(50): Sala que o curso é realizado.
+  * Name varchar(255): Nome do curso.
+  * Period varchar(50): Período que o curso é realizado(matutino/vespertino/noturno).
+  * Classroom varchar(50): Sala que o curso é realizado.
 
 
-* ### Tabela junção Alunos_Cursos:
-  * ID serial int PRIMARY KEY: Chave  primária e identificador do relacionamento entre aluno e curso.
-  * AlunoID int NOT NULL: Identificador do aluno e não pode ser nulo.
-  * CursoID int NOT NULL: Identificador do curso e não pode ser nulo.
-  * Sala varchar(50): Sala que o curso é realizado.
-  * FOREIGN KEY (AlunoID) REFERENCES Alunos (ID): Chave estrangeira referente ao ID do aluno.
-  * FOREIGN KEY (CursoID) REFERENCES Cursos (ID): Chave estrangeira referente ao ID do curso.
+* ### Tabela junção Students_Courses:
+  * ID serial int PRIMARY KEY: Chave  primária e identificador do relacionamento entre student e course.
+  * StudentID int NOT NULL: Identificador do student e não pode ser nulo.
+  * CourseID int NOT NULL: Identificador do course e não pode ser nulo.
+  * FOREIGN KEY (StudentID) REFERENCES Students (ID): Chave estrangeira referente ao ID do student.
+  * FOREIGN KEY (StudentID) REFERENCES Courses (ID): Chave estrangeira referente ao ID do course.
 
 * ### Relacionamentos:
-  * Muitos-Para-Muitos ou N para N: Este é o tipo de relacionamento que temos entre Alunos e Cursos.
+  * Muitos-Para-Muitos ou N para N: Este é o tipo de relacionamento que temos entre Students e Courses.
   
-        Aqui, um aluno pode estar matriculado em vários cursos, e um curso pode ter vários alunos.
+        Aqui, um student pode estar matriculado em vários courses, e um curso pode ter vários student.
         
-        Devido à natureza complexa desse relacionamento, ele não pode ser representado diretamente no modelo relacional e requer uma tabela de junção ou uma tabela associativa, que no nosso caso é a tabela Alunos_Cursos.
+        Devido à natureza complexa desse relacionamento, ele não pode ser representado diretamente no modelo relacional e requer uma tabela de junção ou uma tabela associativa, que no nosso caso é a tabela Students_Courses.
 
 ___
 
@@ -94,22 +93,22 @@ ___
     ```
 
 ```sql
--- Adicionando Alunos
- INSERT INTO Alunos (Nome, Idade) VALUES 
+-- Adicionando Student
+ INSERT INTO Student (Name, Age) VALUES 
 ('João', 20),
 ('Maria', 22),
 ('Carlos', 19);
 
--- Adicionando Cursos
-INSERT INTO Cursos (Nome, Periodo, Sala) VALUES 
+-- Adicionando Courses
+INSERT INTO Courses (Name, Period, Classroom) VALUES 
 ('Matemática', 'Manhã', '101'),
 ('Literatura', 'Tarde', '102'),
 ('Ciência', 'Manhã', '103'),
 ('História', 'Tarde', '104'),
 ('Geografia', 'Noite', '105');
 
--- Vinculando Alunos a Cursos
-INSERT INTO Alunos_Cursos (AlunoID, CursoID) VALUES 
+-- Vinculando Student a Courses
+INSERT INTO Students_Courses (StudentID, CourseID) VALUES 
 (1, 1),
 (1, 2),
 (2, 3),
@@ -140,19 +139,19 @@ ___
     ```
 
 ```sql
--- Alterando dado da tabela de Alunos
-UPDATE Alunos
-SET Idade = 21
-WHERE Nome = 'João';
+-- Alterando dado da tabela de Students
+UPDATE Students
+SET Age = 21
+WHERE Name = 'João';
 
--- Alterando dado da tabela de Cursos
-UPDATE Cursos
-SET Periodo = 'Manhã'
-WHERE Nome = 'Geografia';
+-- Alterando dado da tabela de Courses
+UPDATE Courses
+SET Period = 'Manhã'
+WHERE Name = 'Geografia';
 
 -- Atualizar Múltiplas Colunas da tabela de Cursos
-UPDATE Cursos
-SET Nome = 'Matemática Avançada', Sala = '202'
+UPDATE Courses
+SET Name = 'Matemática Avançada', Classroom = '202'
 WHERE ID = 1;
 ```
 
@@ -193,23 +192,23 @@ ____
 
 ```sql
 -- Deletar um Registro Específico
-DELETE FROM Alunos
-WHERE Nome = 'Rafael';
+DELETE FROM Students
+WHERE Name = 'Rafael';
 
 -- Deletar Registros com Condições Específicas
-DELETE FROM Alunos
-WHERE Idade < 20;
+DELETE FROM Students
+WHERE Age < 20;
 
 -- Deletar Todos os Registros de uma Tabela
-DELETE FROM Alunos;
+DELETE FROM Students;
 ```
 
-### Registros na tabela de Alunos:
+### Registros na tabela de Students:
 <table>
   <tr>
     <th style="background-color: #989595;"><strong>Id</strong></th>
-    <th style="background-color: #989595;"><strong>Nome</strong></th>
-    <th style="background-color: #989595;"><strong>Idade</strong></th>
+    <th style="background-color: #989595;"><strong>Name</strong></th>
+    <th style="background-color: #989595;"><strong>Age</strong></th>
   </tr>
   <tr>
     <td>2</td>
@@ -229,13 +228,13 @@ DELETE FROM Alunos;
 </table>
 
 
-### Registros na tabela de Cursos:
+### Registros na tabela de Courses:
 <table>
   <tr>
     <th style="background-color: #989595;"><strong>Id</strong></th>
-    <th style="background-color: #989595;"><strong>Nome</strong></th>
-    <th style="background-color: #989595;"><strong>Periodo</strong></th>
-    <th style="background-color: #989595;"><strong>Sala</strong></th>
+    <th style="background-color: #989595;"><strong>Name</strong></th>
+    <th style="background-color: #989595;"><strong>Period</strong></th>
+    <th style="background-color: #989595;"><strong>Classroom</strong></th>
   </tr>
   <tr>
     <td>2</td>
@@ -270,12 +269,12 @@ DELETE FROM Alunos;
 </table>
 
 
-### Registros na tabela de Alunos_Cursos:
+### Registros na tabela de Students_Courses:
 <table>
   <tr>
     <th style="background-color: #989595;"><strong>Id</strong></th>
-    <th style="background-color: #989595;"><strong>AlunoId</strong></th>
-    <th style="background-color: #989595;"><strong>CursoId</strong></th>
+    <th style="background-color: #989595;"><strong>StudentID</strong></th>
+    <th style="background-color: #989595;"><strong>CourseID</strong></th>
   </tr>
   <tr>
     <td>1</td>
