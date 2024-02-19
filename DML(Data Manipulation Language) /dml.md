@@ -93,7 +93,7 @@ ___
     ```
 
 ```sql
--- Adicionando Student
+-- Adicionando Students
  INSERT INTO Student (Name, Age) VALUES 
 ('João', 20),
 ('Maria', 22),
