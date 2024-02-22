@@ -44,6 +44,11 @@
     <td>João</td>
     <td>21</td>
   </tr>
+  <tr>
+    <td>1</td>
+    <td>Miguel</td>
+    <td>21</td>
+  </tr>
 </table>
 
 
@@ -154,4 +159,75 @@
 * Ordenando pelo campo age na tabela Students:
 ```sql
   SELECT * FROM Students ORDER BY Age;
+```
+
+## O que são Joins?
+ 
+### - JOINs são comandos em SQL que permitem unir dados de duas ou mais tabelas, com base em uma coluna relacionada entre elas. Imagine que cada tabela é como uma lista separada e JOIN é uma maneira de combinar essas listas em uma só, com base em critérios comuns.
+
+## Tipos de Joins?
+
+### - INNER JOIN  é usado para combinar registros de duas tabelas baseando-se em uma condição de correspondência. Somente os registros que atendem à condição de correspondência nas duas tabelas são incluídos no resultado final, então retorna linhas quando há pelo menos uma correspondência em ambas as tabelas.
+
+* Consulta simples, vamos usar apenas a relação entre duas tabelas: Students e Students_Courses. A tabela Students possui informações sobre os alunos, e Students_Courses tem informações sobre quais cursos os alunos estão matriculados:
+
+      Neste comando SQL, estamos fazendo o seguinte:
+
+      SELECT Students.Name: Estamos pedindo para que o resultado mostre apenas o nome dos alunos.
+
+      FROM Students: Indicamos que a tabela principal que estamos usando é a Students.
+
+      INNER JOIN Students_Courses ON Students.ID = Students_Courses.StudentID: Estamos dizendo para juntar a tabela Students com a tabela Students_Courses onde o campo ID da tabela Students corresponde ao campo StudentID da tabela Students_Courses, ou seja vai retornar os nomes dos alunos(João,João, Maria, Carlos), não retorna o aluno (Miguel) pois ele não esta vinculado a nenhum curso, perceba que retornar 2 vezes o nome do aluno (João).
+
+      A consulta com INNER JOIN retorna registros duplicados quando existem múltiplas correspondências na tabela com a qual está sendo feita a junção. No caso do aluno "João", ele aparece duas vezes porque está matriculado em dois cursos diferentes.
+
+```sql
+SELECT Students.Name
+FROM Students
+INNER JOIN Students_Courses ON Students.ID = Students_Courses.StudentID;
+```
+
+* Alunos e seus cursos com filtragem por idade:
+```sql
+SELECT 
+  Students.Name AS StudentName,
+  Courses.Name AS CourseName
+FROM 
+  Students
+INNER JOIN 
+  Students_Courses ON Students.ID = Students_Courses.StudentID
+INNER JOIN 
+  Courses ON Students_Courses.CourseID = Courses.ID
+WHERE 
+  Students.Age > 20;
+```
+
+* Alunos e seus cursos com filtragem por período do curso:
+```sql
+SELECT 
+  Students.Name AS StudentName, 
+  Courses.Name AS CourseName
+FROM 
+  Students
+INNER JOIN 
+  Students_Courses ON Students.ID = Students_Courses.StudentID
+INNER JOIN 
+  Courses ON Students_Courses.CourseID = Courses.ID
+WHERE 
+  Courses.Period = 'Manhã';
+```
+
+* Alunos e seus cursos com múltiplas condições:
+```sql
+SELECT 
+  Students.Name AS StudentName, 
+  Courses.Name AS CourseName
+FROM 
+  Students
+INNER JOIN 
+  Students_Courses ON Students.ID = Students_Courses.StudentID
+INNER JOIN 
+  Courses ON Students_Courses.CourseID = Courses.ID
+WHERE 
+  Students.Age > 20 AND Courses.Period = 'Manhã';
 ```
