@@ -231,3 +231,71 @@ INNER JOIN
 WHERE 
   Students.Age > 20 AND Courses.Period = 'Manhã';
 ```
+
+### - O RIGHT JOIN é uma operação em SQL usada para combinar e retornar linhas de duas ou mais tabelas. 
+
+### A peculiaridade do RIGHT JOIN é que ele retorna todas as linhas da tabela à direita (a segunda tabela mencionada na consulta) e as linhas correspondentes da tabela à esquerda (a primeira tabela). Quando não há correspondências entre as tabelas, o RIGHT JOIN preenche as colunas da tabela à esquerda com valores NULL.
+
+    Exemplo:
+
+    Temos duas tabelas (Students) e (Courses).
+    
+    Queremos listar todos os cursos disponíveis e, se algum aluno estiver matriculado nesses cursos, você também quer mostrar os nomes desses alunos.
+    
+    Se um curso não tiver alunos matriculados, você ainda quer listar o curso, mas a coluna do aluno ficará como (NULL).
+
+    Atenção: Por esse motivo Right join não deve ser utilizado quando vc quer obter resultados que tenha correspondência nas duas tabelas.
+
+## Estrutura Básica Right Join:
+### SELECT colunas: Especifica quais colunas você deseja selecionar para o resultado.
+
+- FROM tabela1: A primeira tabela da qual você quer combinar dados.
+
+- RIGHT JOIN tabela2: A segunda tabela que você quer garantir que todas as linhas sejam retornadas.
+
+- ON tabela1.coluna = tabela2.coluna: A condição que estabelece como as duas tabelas devem ser unidas.
+
+
+```sql
+SELECT colunas
+FROM tabela1
+RIGHT JOIN tabela2 ON tabela1.coluna = tabela2.coluna;
+```
+
+* Se quisermos listar todos os cursos junto com os alunos matriculados, usaríamos:
+
+```sql
+SELECT Courses.Name AS Curso, Students.Name AS Aluno
+FROM Courses
+RIGHT JOIN Students_Courses ON Courses.ID = Students_Courses.CourseID
+RIGHT JOIN Students ON Students_Courses.StudentID = Students.ID;
+```
+
+### - O LEFT JOIN é uma operação em SQL usada para combinar e retornar linhas de duas ou mais tabelas. 
+
+### A particularidade do LEFT JOIN é que ele retorna todas as linhas da tabela à esquerda (a primeira tabela mencionada na consulta) e as linhas correspondentes da tabela à direita (a segunda tabela). Quando não existem correspondências na tabela à direita para linhas na tabela à esquerda, o LEFT JOIN preenche as colunas da tabela à direita com valores NULL.
+
+## Estrutura Básica Left Join:
+### SELECT colunas: Especifica quais colunas você deseja selecionar para o resultado.
+
+- SELECT colunas: Especifica as colunas que você deseja incluir no resultado.
+
+- FROM tabela1: Indica a tabela principal de onde os dados serão selecionados inicialmente.
+
+- LEFT JOIN tabela2 ON tabela1.coluna = tabela2.coluna: Define como as tabelas serão unidas, garantindo que todas as linhas da tabela à esquerda sejam retornadas, juntamente com as linhas correspondentes da tabela à direita.
+
+
+```sql
+SELECT colunas
+FROM tabela1
+LEFT JOIN tabela2 ON tabela1.coluna = tabela2.coluna;
+```
+
+* Para listar todos os alunos e seus cursos, alterando o foco do RIGHT JOIN para LEFT JOIN, a consulta seria adaptada da seguinte forma:
+
+```sql
+SELECT Students.Name AS Aluno, Courses.Name AS Curso
+FROM Students
+LEFT JOIN Students_Courses ON Students.ID = Students_Courses.StudentID
+LEFT JOIN Courses ON Students_Courses.CourseID = Courses.ID;
+```
