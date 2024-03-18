@@ -299,3 +299,81 @@ FROM Students
 LEFT JOIN Students_Courses ON Students.ID = Students_Courses.StudentID
 LEFT JOIN Courses ON Students_Courses.CourseID = Courses.ID;
 ```
+
+### - O GROUP BY é usado no SQL para agrupar registros que têm valores iguais em determinadas colunas
+
+### Geralmente usamos para agrupar e contar algum dado ou tirar alguma média.
+
+## Estrutura Básica GROUP BY:
+```sql
+SELECT coluna1, function(coluna2)
+FROM tabela
+GROUP BY coluna1;
+```
+
+### Aqui é um exemplo concetro do comando, contar quantos estudantes estão inscritos em cada curso na tabela Students_Courses:
+ - **CourseID** é a coluna pela qual estamos agrupando.
+
+ - **COUNT(StudentID)** é a função de agregação que conta o número de estudantes para cada CourseID.
+
+ - **Students_Courses** é a tabela de onde os dados são selecionados.
+
+```sql
+SELECT CourseID, COUNT(StudentID)
+FROM Students_Courses
+GROUP BY CourseID;
+```
+
+### - O HAVING é usado para filtrar grupos criados pelo GROUP BY Geralmente usamos o HAVING para aplicar condições sobre resultados agregados, como contagens ou médias, permitindo incluir apenas grupos específicos nos resultados finais.
+
+### Diferente da cláusula WHERE, que filtra linhas individuais antes da operação de agrupamento, o HAVING permite aplicar filtros depois que os grupos foram formados, isso significa que o HAVING é essencialmente inútil sem um GROUP BY, porque sua função é filtrar grupos, e sem o GROUP BY, não há grupos para filtrar.
+
+## Estrutura Básica HAVING:
+```sql
+SELECT coluna1, AVG(coluna2)
+FROM tabela
+WHERE coluna2 > 10;
+```
+
+ - **CourseID** é a coluna pela qual estamos agrupando.
+
+ - **COUNT(StudentID)** é a função de agregação que conta o número de estudantes para cada CourseID.
+
+ - **HAVING COUNT(StudentID) > 5** é a condição que filtra apenas os grupos (cursos) que têm mais de 5 estudantes inscritos.
+
+ - **Students_Courses** é a tabela de onde os dados são selecionados.
+
+### Aqui está um exemplo concreto do comando: filtrar cursos que têm mais de 5 estudantes inscritos, na tabela Students_Courses:
+
+```sql
+SELECT CourseID, COUNT(StudentID) AS NumberOfStudents
+FROM Students_Courses
+GROUP BY CourseID
+HAVING COUNT(StudentID) > 5;
+```
+### - (LIMIT e OFFSET) A cláusula LIMIT é simples e direta: ela instrui o banco de dados a retornar no máximo o número especificado de registros da consulta. Neste exemplo, estamos solicitando apenas os nomes dos primeiros 5 estudantes da tabela Students. Isso pode ser útil, por exemplo, se você quiser mostrar uma lista prévia ou realizar uma análise rápida de um subconjunto de dados.
+
+### - O LIMIT é especialmente útil em interfaces de usuário que exibem dados em páginas, onde você quer mostrar uma quantidade fixa de registros por página. Em conjunto com a cláusula OFFSET, você pode navegar através de grandes conjuntos de dados em partes mais gerenciáveis.
+
+### Uso com OFFSET para Paginação, além do LIMIT, você pode usar a cláusula OFFSET para pular um número específico de registros antes de começar a retornar os registros. Isso é comum em sistemas de paginação:
+
+## Estrutura Básica LIMIT:
+```sql
+SELECT colunas
+FROM tabela
+LIMIT numero;
+```
+
+## Estrutura Básica LIMIT e OFFSET:
+```sql
+SELECT colunas
+FROM tabela
+LIMIT numero OFFSET numero;
+```
+### OFFSET 10 diz ao banco de dados para pular os primeiros 10 registros. Após pular esses registros, o LIMIT 5 aplicará, retornando os próximos 5 registros após os primeiros 10, isso é útil para implementar a paginação, onde, por exemplo, você quer mostrar a terceira página de resultados, assumindo que cada página mostra 5 registros exemplo:
+
+```sql
+SELECT Name
+FROM Students
+LIMIT 5 OFFSET 10;
+```
