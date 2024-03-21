@@ -370,10 +370,34 @@ SELECT colunas
 FROM tabela
 LIMIT numero OFFSET numero;
 ```
-### OFFSET 10 diz ao banco de dados para pular os primeiros 10 registros. Após pular esses registros, o LIMIT 5 aplicará, retornando os próximos 5 registros após os primeiros 10, isso é útil para implementar a paginação, onde, por exemplo, você quer mostrar a terceira página de resultados, assumindo que cada página mostra 5 registros exemplo:
+### OFFSET 10 diz ao banco de dados para pular os primeiros 10 registros, após pular esses registros, o LIMIT 5 aplicará, retornando os próximos 5 registros após os primeiros 10, isso é útil para implementar a paginação, onde por exemplo, você quer mostrar a terceira página de resultados, assumindo que cada página mostra 5 registros exemplo:
 
 ```sql
 SELECT Name
 FROM Students
 LIMIT 5 OFFSET 10;
+```
+
+### - O CAST é usado no SQL para converter um tipo de dado de uma coluna ou expressão para outro tipo, geralmente usamos  para realizar conversões entre tipos compatíveis quando queremos garantir que os dados estejam no formato correto para operações específicas ou para cumprir requisitos de formato de dados
+
+### **ATENÇÂO:** Nem todas as conversões são permitidas,a tentativa de converter tipos incompatíveis resultará em um erro, exemplo tentar converter texto não numérico diretamente para um número pode causar um erro se o texto não representar um número válido.
+
+## Estrutura Básica CAST:
+```sql
+SELECT CAST(expressao AS tipo_desejado)
+FROM tabela;
+
+// ou utilizando a sintaxe simplificada com "::"
+
+SELECT expressao::tipo_desejado
+FROM tabela;
+```
+
+### Exemplo convertendo a coluna "age" que originalmente é do tipo "Integer" para o tipo (String)"Varchar":
+```sql
+SELECT Name, CAST(Age AS INTEGER)
+FROM Students;
+
+SELECT Name, Age::INTEGER
+FROM Students;
 ```
