@@ -401,3 +401,43 @@ FROM Students;
 SELECT Name, Age::INTEGER
 FROM Students;
 ```
+
+### - O EXPLAIN no PostgreSQL é uma ferramenta poderosa usada para analisar e entender como o PostgreSQL executa suas consultas SQL, ele mostra o plano de execução da consulta, que é basicamente uma descrição de como o banco de dados vai buscar os dados necessários para responder à sua consulta. Isso inclui informações sobre joins, índices utilizados, estimativas de custo e muito mais.
+
+    Porque utilizar EXPLAIN:
+
+    * Entender como suas consultas são processadas.
+
+    * Identificar gargalos de performance.
+
+    * Verificar se os índices corretos estão sendo utilizados.
+
+    * Otimizar consultas SQL para melhorar a eficiência.
+
+## Estrutura Básica EXPLAIN:
+```sql
+EXPLAIN sua_consulta_sql_aqui;
+```
+### Exemplo conuslta básíca com EXPLAIN:
+```sql
+EXPLAIN SELECT * FROM Students WHERE Age > 18;
+```
+    Saída do comando acima:
+    
+    1- Seq Scan on students  (cost=0.00..11.75 rows=47 width=524)
+
+    2- Filter: (age > 18)
+
+    Detalhes da saída acima:
+
+    -Seq Scan: Indica uma varredura sequencial da tabela, o PostgreSQL está lendo a tabela inteira para encontrar as linhas que correspondem à condição.
+
+    -Index Scan: Mostra que um índice foi utilizado para encontrar as linhas rapidamente.
+
+    -Cost: Estimativa do custo para executar a operação, onde o custo é uma unidade abstrata definida pelo PostgreSQL, geralmente inclui dois números, representando o custo inicial antes do primeiro registro ser retornado e o custo total para retornar todos os registros.
+
+    -Rows: Número estimado de linhas que serão retornadas pela operação.
+
+    -Width: Largura média estimada de uma linha nos resultados (em bytes).
+
+    -Filter: na saída do EXPLAIN ou EXPLAIN ANALYZE no PostgreSQL mostra a expressão de filtragem aplicada à consulta SQL, este filtro é baseado na cláusula WHERE da consulta e especifica as condições que as linhas devem atender para serem incluídas nos resultados finais, significa que o PostgreSQL aplicou essa condição para determinar quais linhas da varredura (seja sequencial ou de índice) serão retornadas.
